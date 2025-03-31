@@ -1,0 +1,112 @@
+{
+    "doctype": "DocType",
+    "name": "Maintenance Request",
+    "module": "HDMMS",
+    "custom": 1,
+    "fields": [
+      {
+        "fieldname": "asset",
+        "fieldtype": "Link",
+        "label": "Asset",
+        "options": "Asset",
+        "reqd": 1
+      },
+      {
+        "fieldname": "request_date",
+        "fieldtype": "Date",
+        "label": "Request Date",
+        "reqd": 1,
+        "default": "Today"
+      },
+      {
+        "fieldname": "priority",
+        "fieldtype": "Select",
+        "label": "Priority",
+        "options": "Low\nMedium\nHigh\nCritical",
+        "default": "Medium"
+      },
+      {
+        "fieldname": "status",
+        "fieldtype": "Select",
+        "label": "Status",
+        "options": "Draft\nOpen\nAssigned\nIn Progress\nCompleted\nCancelled",
+        "default": "Draft"
+      },
+      {
+        "fieldname": "maintenance_type",
+        "fieldtype": "Select",
+        "label": "Type",
+        "options": "Corrective\nPreventive\nPredictive\nConditional"
+      },
+      {
+        "fieldname": "description",
+        "fieldtype": "Text Editor",
+        "label": "Description"
+      },
+      {
+        "fieldname": "team_section",
+        "fieldtype": "Section Break",
+        "label": "Team Assignment",
+        "collapsible": 1
+      },
+      {
+        "fieldname": "maintenance_team",
+        "fieldtype": "Link",
+        "label": "Maintenance Team",
+        "options": "Maintenance Team"
+      },
+      {
+        "fieldname": "assigned_to",
+        "fieldtype": "Link",
+        "label": "Assigned To",
+        "options": "Employee"
+      },
+      {
+        "fieldname": "items_section",
+        "fieldtype": "Section Break",
+        "label": "Required Materials",
+        "collapsible": 1
+      },
+      {
+        "fieldname": "items",
+        "fieldtype": "Table",
+        "label": "Items",
+        "options": "Maintenance Item"
+      },
+      {
+        "fieldname": "requisitions_section",
+        "fieldtype": "Section Break",
+        "label": "Material Requisitions",
+        "collapsible": 1
+      },
+      {
+        "fieldname": "material_requisitions",
+        "fieldtype": "Table",
+        "label": "Material Requisitions",
+        "options": "Linked Material Requisition",
+        "read_only": 1
+      },
+      {
+        "fieldname": "work_order_section",
+        "fieldtype": "Section Break",
+        "label": "Work Order",
+        "collapsible": 1
+      },
+      {
+        "fieldname": "work_order",
+        "fieldtype": "Link",
+        "label": "Work Order",
+        "options": "Work Order",
+        "read_only": 1
+      }
+    ],
+    "permissions": [
+      {
+        "role": "Maintenance Manager",
+        "read": 1,
+        "write": 1,
+        "create": 1,
+        "delete": 1
+      }
+    ]
+  }

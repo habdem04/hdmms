@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "creation": "2025-03-31 22:35:21.538982",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "designation",
+  "role",
+  "contact_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "default": "Technician",
+   "fieldname": "role",
+   "fieldtype": "Select",
+   "label": "Role in Team",
+   "options": "Technician\nSupervisor\nElectrician\nMechanic\nHelper"
+  },
+  {
+   "fetch_from": "employee.cell_number",
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Number",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-31 22:36:32.051653",
+ "modified_by": "Administrator",
+ "module": "hdmms",
+ "name": "Team Member",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

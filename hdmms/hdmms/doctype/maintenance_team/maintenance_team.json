@@ -1,0 +1,26 @@
+{
+    "doctype": "DocType",
+    "name": "Maintenance Team",
+    "module": "HDMMS",
+    "fields": [
+      {
+        "fieldname": "team_name",
+        "fieldtype": "Data",
+        "label": "Team Name",
+        "reqd": 1
+      },
+      {
+        "fieldname": "team_leader",
+        "fieldtype": "Link",
+        "label": "Team Leader",
+        "options": "Employee",
+        "reqd": 1
+      },
+      {
+        "fieldname": "team_members",
+        "fieldtype": "Table",
+        "label": "Team Members",
+        "options": "Team Member"
+      }
+    ]
+  }

@@ -1,0 +1,31 @@
+{
+    "doctype": "DocType",
+    "name": "Linked Material Requisition",
+    "module": "HDMMS",
+    "istable": true,
+    "naming_rule": "By fieldname",
+    "autoname": "field:material_request",
+    "fields": [
+      {
+        "fieldname": "material_request",
+        "fieldtype": "Link",
+        "label": "Material Request",
+        "options": "Material Request",
+        "reqd": 1
+      },
+      {
+        "fieldname": "status",
+        "fieldtype": "Data",
+        "label": "Status",
+        "fetch_from": "material_request.status",
+        "read_only": 1
+      },
+      {
+        "fieldname": "date",
+        "fieldtype": "Date",
+        "label": "Date",
+        "fetch_from": "material_request.transaction_date",
+        "read_only": 1
+      }
+    ]
+  }

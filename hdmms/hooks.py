@@ -242,3 +242,28 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doc_events = {
+    "Asset": {
+        "validate": "hdmms.hdmms.custom.asset.validate_maintenance_status"
+    },
+    "Maintenance Request": {
+        "on_submit": "hdmms.hdmms.doctype.maintenance_request.maintenance_request.update_asset_maintenance_date"
+    }
+}
+
+# Scheduled Tasks
+scheduler_events = {
+    "daily": [
+        "hdmms.hdmms.doctype.maintenance_request.maintenance_request.check_due_maintenance"
+    ]
+}
+
+# Permissions
+permissions = [
+    {
+        "role": "Maintenance Manager",
+        "label": "HDMMS",
+        "rights": ["read", "write", "create", "delete", "report"],
+        "if_owner": 0
+    }
+]
