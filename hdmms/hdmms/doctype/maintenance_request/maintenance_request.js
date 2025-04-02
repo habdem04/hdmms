@@ -8,67 +8,55 @@
 // });
 frappe.ui.form.on('Maintenance Request', {
     refresh: function(frm) {
-        // Add button to create material requisition
-        if(!frm.doc.__islocal && frm.doc.status !== "Completed") {
-            frm.add_custom_button(__('Create Material Requisition'), function() {
+        // Add button to create Job Order if not already created
+        if(frm.doc.docstatus === 1 && !frm.doc.job_order) {
+            frm.add_custom_button(__('Create Job Order'), function() {
                 frappe.call({
-                    method: "hdmms.hdmms.doctype.maintenance_request.maintenance_request.create_material_requisition",
+                    method: "hdmms.hdmms.api.create_job_order",
                     args: {
-                        docname: frm.doc.name
+                        maintenance_request: frm.doc.name
                     },
                     callback: function(r) {
-                        if(!r.exc) {
-                            frm.refresh_field("material_requisitions");
+                        if(r.message) {
+                            frappe.set_route("Form", "Job Order", r.message);
                         }
                     }
                 });
             });
         }
         
-        // Open Work Order button
-        if(frm.doc.work_order) {
-            frm.add_custom_button(__('Open Work Order'), function() {
-                frappe.set_route('Form', 'Work Order', frm.doc.work_order);
+        // If Job Order exists, add button to open it
+        if(frm.doc.job_order) {
+            frm.add_custom_button(__('Open Job Order'), function() {
+                frappe.set_route("Form", "Job Order", frm.doc.job_order);
             });
         }
     },
-    
-    maintenance_team: function(frm) {
-        // Update assigned_to options when team changes
-        if(frm.doc.maintenance_team) {
+    setup: function(frm) {
+        // Set default maintenance team when form loads for new records
+        if(frm.is_new()) {
             frappe.call({
-                method: "frappe.client.get",
-                args: {
-                    doctype: "Maintenance Team",
-                    name: frm.doc.maintenance_team
-                },
+                method: "hdmms.api.get_default_maintenance_team",
                 callback: function(r) {
                     if(r.message) {
-                        let team_leader = r.message.team_leader;
-                        frm.set_value("assigned_to", team_leader);
-                        
-                        // Update dropdown options
-                        let members = r.message.team_members || [];
-                        let options = members.map(m => m.employee);
-                        options.unshift(team_leader);
-                        
-                        frm.set_df_property("assigned_to", "options", options);
+                        frm.set_value("maintenance_team", r.message);
                     }
                 }
             });
         }
-    }
-});
-
-// Calculate amount for items
-frappe.ui.form.on('Maintenance Item', {
-    item_code: function(frm, cdt, cdn) {
-        let item = frappe.get_doc(cdt, cdn);
-        if(item.item_code) {
-            frappe.model.set_value(cdt, cdn, 'item_name', 
-                frappe.db.get_value("Item", item.item_code, "item_name"));
-            frappe.model.set_value(cdt, cdn, 'uom', 
-                frappe.db.get_value("Item", item.item_code, "stock_uom"));
+    },
+    priority: function(frm) {
+        // Set default expected dates based on priority
+        let days_to_add = 7;
+        if(frm.doc.priority === "High") days_to_add = 3;
+        if(frm.doc.priority === "Critical") days_to_add = 1;
+        
+        if(frm.doc.request_date && !frm.doc.expected_start_date) {
+            let start_date = frappe.datetime.add_days(frm.doc.request_date, 1);
+            frm.set_value("expected_start_date", start_date);
+            
+            let end_date = frappe.datetime.add_days(start_date, days_to_add);
+            frm.set_value("expected_end_date", end_date);
         }
     }
 });

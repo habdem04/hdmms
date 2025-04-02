@@ -241,22 +241,24 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+# /hdmms/hdmms/hooks.py
+app_include_js = "/assets/hdmms/js/asset.js"
 
-doc_events = {
-    "Asset": {
-        "validate": "hdmms.hdmms.custom.asset.validate_maintenance_status"
-    },
-    "Maintenance Request": {
-        "on_submit": "hdmms.hdmms.doctype.maintenance_request.maintenance_request.update_asset_maintenance_date"
-    }
-}
 
-# Scheduled Tasks
-scheduler_events = {
-    "daily": [
-        "hdmms.hdmms.doctype.maintenance_request.maintenance_request.check_due_maintenance"
-    ]
-}
+
+# doc_events = {
+   
+#     "Maintenance Request": {
+#         "on_submit": "hdmms.hdmms.doctype.maintenance_request.maintenance_request.update_asset_maintenance_date"
+#     }
+# }
+
+# # Scheduled Tasks
+# scheduler_events = {
+#     "daily": [
+#         "hdmms.hdmms.doctype.maintenance_request.maintenance_request.check_due_maintenance"
+#     ]
+# }
 
 # Permissions
 permissions = [
@@ -267,3 +269,7 @@ permissions = [
         "if_owner": 0
     }
 ]
+
+permission_query_conditions = {
+    "Stock Entry": "hdmms.stf.get_permission_query_conditions"
+}

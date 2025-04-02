@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class MaintenanceRequest(Document):
+class JobOrderTask(Document):
 	pass

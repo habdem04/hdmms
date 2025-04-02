@@ -1,40 +1,41 @@
 {
-    "custom_fields": [
-      {
-        "dt": "Asset",
-        "fieldname": "maintenance_section",
-        "fieldtype": "Section Break",
-        "label": "Maintenance",
-        "insert_after": "gross_purchase_amount"
-      },
-      {
-        "dt": "Asset",
-        "fieldname": "maintenance_required",
-        "fieldtype": "Check",
-        "label": "Requires Maintenance",
-        "insert_after": "maintenance_section"
-      },
-      {
-        "dt": "Asset",
-        "fieldname": "last_maintenance_date",
-        "fieldtype": "Date",
-        "label": "Last Maintenance",
-        "insert_after": "maintenance_required"
-      },
-      {
-        "dt": "Asset",
-        "fieldname": "next_maintenance_date",
-        "fieldtype": "Date",
-        "label": "Next Maintenance",
-        "insert_after": "last_maintenance_date"
-      },
-      {
-        "dt": "Asset",
-        "fieldname": "maintenance_requests",
-        "fieldtype": "Table",
-        "label": "Maintenance History",
-        "options": "Maintenance Request",
-        "insert_after": "next_maintenance_date"
-      }
-    ]
-  }
+  "custom_fields": [
+    {
+      "dt": "Asset",
+      "fieldname": "maintenance_section",
+      "fieldtype": "Section Break",
+      "label": "Maintenance",
+      "insert_after": "gross_purchase_amount",
+      "collapsible": 1
+    },
+    {
+      "dt": "Asset",
+      "fieldname": "maintenance_required",
+      "fieldtype": "Check",
+      "label": "Requires Maintenance",
+      "insert_after": "maintenance_section"
+    },
+    {
+      "dt": "Asset",
+      "fieldname": "last_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Last Maintenance Date",
+      "insert_after": "maintenance_required"
+    },
+    {
+      "dt": "Asset",
+      "fieldname": "next_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Next Maintenance Date",
+      "insert_after": "last_maintenance_date"
+    },
+    {
+      "dt": "Asset",
+      "fieldname": "maintenance_requests",
+      "fieldtype": "Table",
+      "label": "Maintenance History",
+      "options": "Maintenance Request",
+      "insert_after": "next_maintenance_date"
+    }
+  ]
+}

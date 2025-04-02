@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-04-01 11:31:27.812508",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "maintenance_request",
+  "asset",
+  "maintenance_team",
+  "assigned_to",
+  "column_break_adjq",
+  "start_date",
+  "expected_end_date",
+  "status",
+  "priority",
+  "materials_section",
+  "required_materials",
+  "requisitions_section",
+  "material_requisitions",
+  "tasks_section",
+  "tasks",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "maintenance_request",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Maintenance Request",
+   "options": "Maintenance Request",
+   "reqd": 1
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Asset",
+   "options": "Asset",
+   "reqd": 1
+  },
+  {
+   "fieldname": "maintenance_team",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Maintenance Team",
+   "options": "Asset Maintenance Team",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "label": "Assigned Technician",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_end_date",
+   "fieldtype": "Datetime",
+   "label": "Expected Completion"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nScheduled\nIn Progress\nCompleted\nCancelled"
+  },
+  {
+   "default": "Medium",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "Low\nMedium\nHigh\nCritical"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "materials_section",
+   "fieldtype": "Section Break",
+   "label": "Required Materials"
+  },
+  {
+   "fieldname": "required_materials",
+   "fieldtype": "Table",
+   "label": "Materials",
+   "options": "Job Order Material",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "requisitions_section",
+   "fieldtype": "Section Break",
+   "label": "Material Requisitions"
+  },
+  {
+   "fieldname": "material_requisitions",
+   "fieldtype": "Table",
+   "label": "Requisitions",
+   "options": "Linked Material Requisition",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "tasks_section",
+   "fieldtype": "Section Break",
+   "label": "Tasks"
+  },
+  {
+   "fieldname": "tasks",
+   "fieldtype": "Table",
+   "label": "Task List",
+   "options": "Job Order Task"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Additional Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "MMS-JO-.YYYY.-"
+  },
+  {
+   "fieldname": "column_break_adjq",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-04-02 07:40:00.710957",
+ "modified_by": "Administrator",
+ "module": "hdmms",
+ "name": "Job Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Maintenance Manager",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Maintenance Technician",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

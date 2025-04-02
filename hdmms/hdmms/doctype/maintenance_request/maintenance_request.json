@@ -1,112 +1,149 @@
 {
-    "doctype": "DocType",
-    "name": "Maintenance Request",
-    "module": "HDMMS",
-    "custom": 1,
-    "fields": [
-      {
-        "fieldname": "asset",
-        "fieldtype": "Link",
-        "label": "Asset",
-        "options": "Asset",
-        "reqd": 1
-      },
-      {
-        "fieldname": "request_date",
-        "fieldtype": "Date",
-        "label": "Request Date",
-        "reqd": 1,
-        "default": "Today"
-      },
-      {
-        "fieldname": "priority",
-        "fieldtype": "Select",
-        "label": "Priority",
-        "options": "Low\nMedium\nHigh\nCritical",
-        "default": "Medium"
-      },
-      {
-        "fieldname": "status",
-        "fieldtype": "Select",
-        "label": "Status",
-        "options": "Draft\nOpen\nAssigned\nIn Progress\nCompleted\nCancelled",
-        "default": "Draft"
-      },
-      {
-        "fieldname": "maintenance_type",
-        "fieldtype": "Select",
-        "label": "Type",
-        "options": "Corrective\nPreventive\nPredictive\nConditional"
-      },
-      {
-        "fieldname": "description",
-        "fieldtype": "Text Editor",
-        "label": "Description"
-      },
-      {
-        "fieldname": "team_section",
-        "fieldtype": "Section Break",
-        "label": "Team Assignment",
-        "collapsible": 1
-      },
-      {
-        "fieldname": "maintenance_team",
-        "fieldtype": "Link",
-        "label": "Maintenance Team",
-        "options": "Maintenance Team"
-      },
-      {
-        "fieldname": "assigned_to",
-        "fieldtype": "Link",
-        "label": "Assigned To",
-        "options": "Employee"
-      },
-      {
-        "fieldname": "items_section",
-        "fieldtype": "Section Break",
-        "label": "Required Materials",
-        "collapsible": 1
-      },
-      {
-        "fieldname": "items",
-        "fieldtype": "Table",
-        "label": "Items",
-        "options": "Maintenance Item"
-      },
-      {
-        "fieldname": "requisitions_section",
-        "fieldtype": "Section Break",
-        "label": "Material Requisitions",
-        "collapsible": 1
-      },
-      {
-        "fieldname": "material_requisitions",
-        "fieldtype": "Table",
-        "label": "Material Requisitions",
-        "options": "Linked Material Requisition",
-        "read_only": 1
-      },
-      {
-        "fieldname": "work_order_section",
-        "fieldtype": "Section Break",
-        "label": "Work Order",
-        "collapsible": 1
-      },
-      {
-        "fieldname": "work_order",
-        "fieldtype": "Link",
-        "label": "Work Order",
-        "options": "Work Order",
-        "read_only": 1
-      }
-    ],
-    "permissions": [
-      {
-        "role": "Maintenance Manager",
-        "read": 1,
-        "write": 1,
-        "create": 1,
-        "delete": 1
-      }
-    ]
+ "actions": [],
+ "autoname": "MR-.YYYY.-.MM.-.DD.-.####",
+ "creation": "2025-04-01 22:32:25.592166",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "is_vehicle_maintenance_",
+  "naming_series",
+  "asset",
+  "requested_from_dept_or_section",
+  "request_date",
+  "requested_by",
+  "column_break_tuir",
+  "priority",
+  "expected_start_date",
+  "expected_end_date",
+  "status",
+  "section_break_nwwm",
+  "description",
+  "job_order",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "now",
+   "fieldname": "request_date",
+   "fieldtype": "Datetime",
+   "label": "Request Date"
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "Requested By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Asset",
+   "options": "Asset",
+   "reqd": 1
+  },
+  {
+   "default": "Medium",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "Low\nMedium\nHigh\nCritical"
+  },
+  {
+   "fieldname": "expected_start_date",
+   "fieldtype": "Date",
+   "label": "Expected Start Date"
+  },
+  {
+   "fieldname": "expected_end_date",
+   "fieldtype": "Date",
+   "label": "Expected End Date"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nAssigned\nIn Progress\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Link",
+   "label": "Job Order",
+   "options": "Job Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Maintenance Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "requested_from_dept_or_section",
+   "fieldtype": "Link",
+   "label": "Requested From (Dept Or Section)",
+   "options": "Department"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_vehicle_maintenance_",
+   "fieldtype": "Check",
+   "label": "Is Vehicle Maintenance ?"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "MMS-MR-.YYYY.-"
+  },
+  {
+   "fieldname": "column_break_tuir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_nwwm",
+   "fieldtype": "Section Break"
   }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-04-02 07:49:03.570817",
+ "modified_by": "Administrator",
+ "module": "hdmms",
+ "name": "Maintenance Request",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Maintenance User",
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
