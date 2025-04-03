@@ -6,9 +6,9 @@
  "engine": "InnoDB",
  "field_order": [
   "is_vehicle_maintenance_",
+  "requested_from_cost_center",
   "naming_series",
   "asset",
-  "requested_from_dept_or_section",
   "request_date",
   "requested_by",
   "column_break_tuir",
@@ -72,11 +72,11 @@
    "options": "Open\nAssigned\nIn Progress\nCompleted\nCancelled"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "job_order",
    "fieldtype": "Link",
    "label": "Job Order",
-   "options": "Job Order",
-   "read_only": 1
+   "options": "Job Order"
   },
   {
    "fieldname": "amended_from",
@@ -87,12 +87,6 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
-  },
-  {
-   "fieldname": "requested_from_dept_or_section",
-   "fieldtype": "Link",
-   "label": "Requested From (Dept Or Section)",
-   "options": "Department"
   },
   {
    "default": "0",
@@ -113,11 +107,18 @@
   {
    "fieldname": "section_break_nwwm",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "requested_from_cost_center",
+   "fieldtype": "Link",
+   "label": "Requested From Cost Center",
+   "link_filters": "[[\"Cost Center\",\"is_group\",\"=\",0]]",
+   "options": "Cost Center"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-02 07:49:03.570817",
+ "modified": "2025-04-02 21:39:19.440939",
  "modified_by": "Administrator",
  "module": "hdmms",
  "name": "Maintenance Request",

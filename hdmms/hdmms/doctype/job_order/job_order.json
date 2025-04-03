@@ -16,6 +16,7 @@
   "status",
   "priority",
   "materials_section",
+  "requested_from_cost_center",
   "required_materials",
   "requisitions_section",
   "material_requisitions",
@@ -143,11 +144,19 @@
   {
    "fieldname": "column_break_adjq",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "requested_from_cost_center",
+   "fieldtype": "Link",
+   "label": "Requested From Cost Center",
+   "link_filters": "[[\"Cost Center\",\"is_group\",\"=\",1]]",
+   "options": "Cost Center",
+   "reqd": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-02 07:40:00.710957",
+ "modified": "2025-04-02 21:40:10.852979",
  "modified_by": "Administrator",
  "module": "hdmms",
  "name": "Job Order",

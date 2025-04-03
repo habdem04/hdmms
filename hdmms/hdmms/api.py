@@ -155,3 +155,41 @@ def create_job_order(maintenance_request):
             message=frappe.get_traceback()
         )
         frappe.throw(_(error_message))
+
+
+
+
+@frappe.whitelist()
+def create_material_requisition(job_order):
+    """Creates a Material Requisition for the given Job Order."""
+    job_order_doc = frappe.get_doc("Job Order", job_order)
+    if not job_order_doc.get("required_materials"):
+        frappe.throw(_("No materials required for this job"))
+    
+    mr = frappe.new_doc("Material Request")
+    mr.update({
+        "material_request_type": "Material Transfer",
+        "job_order": job_order_doc.name,
+        "schedule_date": add_days(now_datetime(), 1)
+    })
+    
+    for item in job_order_doc.required_materials:
+        mr.append("items", {
+            "item_code": item.item_code,
+            "qty": item.quantity,
+            "uom": item.uom,
+            "warehouse": item.warehouse or "Stores - " + frappe.defaults.get_user_default("company"),
+            "rate": item.rate if hasattr(item, "rate") else 0
+        })
+    
+    mr.insert(ignore_permissions=True)
+    mr.submit()
+    
+    job_order_doc.append("material_requisitions", {
+        "material_request": mr.name,
+        "status": mr.status,
+        "date": now_datetime()
+    })
+    
+    job_order_doc.save()
+    return mr.name

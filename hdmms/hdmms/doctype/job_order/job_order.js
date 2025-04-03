@@ -4,7 +4,7 @@ frappe.ui.form.on('Job Order', {
         if(frm.doc.docstatus === 0 && frm.doc.required_materials && frm.doc.required_materials.length > 0) {
             frm.add_custom_button(__('Create Material Requisition'), function() {
                 frappe.call({
-                    method: "hdmms.hdmms.doctype.job_order.job_order.create_material_requisition",
+                    method: "hdmms.hdmms.api.create_material_requisition",
                     args: {
                         job_order: frm.doc.name
                     },
@@ -15,6 +15,7 @@ frappe.ui.form.on('Job Order', {
                         }
                     }
                 });
+                
             }, __("Materials"));
         }
         
