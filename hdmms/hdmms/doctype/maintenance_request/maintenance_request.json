@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "MR-.YYYY.-.MM.-.DD.-.####",
+ "autoname": "MMS-.MR.-.YYYY.-.####",
  "creation": "2025-04-01 22:32:25.592166",
  "doctype": "DocType",
  "engine": "InnoDB",

@@ -3,7 +3,7 @@ from frappe import _
 from frappe.utils import nowdate, add_days, now_datetime
 
 def calculate_expected_end_date(priority):
-    """Calculate expected end date based on priority"""
+    """Calculate expected end date based on priority."""
     sla_days = {
         "Low": 14,
         "Medium": 7,
@@ -13,7 +13,7 @@ def calculate_expected_end_date(priority):
     return add_days(now_datetime(), sla_days)
 
 def get_default_maintenance_item():
-    """Returns default maintenance item code"""
+    """Returns default maintenance item code."""
     default_item = "MAINTENANCE_SERVICE"
     if not frappe.db.exists("Item", default_item):
         item = frappe.new_doc("Item")
@@ -46,7 +46,7 @@ def get_default_maintenance_team():
             )
             
             for emp in employees:
-                # The "team_member" field is linked to the User doctype.
+                # Append each employee as a team member
                 team.append("maintenance_team_members", {
                     "team_member": emp.team_member,
                     "full_name": emp.full_name,
@@ -64,7 +64,7 @@ def get_default_technician(team_name):
     """
     Returns the first available technician's Employee record from the maintenance team.
     The child table "maintenance_team_members" stores "team_member" which is a User.
-    We then look up the corresponding Employee using user_id.
+    We then look up the corresponding Employee using the user_id.
     """
     if not frappe.db.exists("Asset Maintenance Team", team_name):
         return None
@@ -122,15 +122,16 @@ def create_job_order(maintenance_request):
             "maintenance_request": mr.name,
             "asset": mr.asset,
             "maintenance_team": maintenance_team,
-            "assigned_to": assigned_to,  # This should be a valid Employee record now.
+            "assigned_to": assigned_to,  # Valid Employee record.
             "priority": mr.priority or "Medium",
             "description": mr.description or "Maintenance work required",
             "status": "Draft",
             "start_date": add_days(now_datetime(), 1),
-            "expected_end_date": calculate_expected_end_date(mr.priority or "Medium")
+            "expected_end_date": calculate_expected_end_date(mr.priority or "Medium"),
+            "requested_from_cost_center": mr.get("requested_from_cost_center")
         })
 
-        # Append default required material if not provided in the maintenance request.
+        # Append default required material if not provided in the Maintenance Request.
         if not mr.get("required_materials"):
             job_order.append("required_materials", {
                 "item_code": get_default_maintenance_item(),
@@ -155,9 +156,6 @@ def create_job_order(maintenance_request):
             message=frappe.get_traceback()
         )
         frappe.throw(_(error_message))
-
-
-
 
 @frappe.whitelist()
 def create_material_requisition(job_order):
