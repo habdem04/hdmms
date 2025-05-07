@@ -36,7 +36,7 @@ frappe.ui.form.on('Maintenance Request', {
         // Set default maintenance team when form loads for new records
         if(frm.is_new()) {
             frappe.call({
-                method: "hdmms.api.get_default_maintenance_team",
+                method: "hdmms.hdmms.api.get_default_maintenance_team",
                 callback: function(r) {
                     if(r.message) {
                         frm.set_value("maintenance_team", r.message);

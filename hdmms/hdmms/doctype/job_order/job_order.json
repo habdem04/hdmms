@@ -13,8 +13,10 @@
   "column_break_adjq",
   "start_date",
   "expected_end_date",
+  "end_date",
   "status",
   "priority",
+  "allow_unlink_mr",
   "materials_section",
   "requested_from_cost_center",
   "required_materials",
@@ -22,15 +24,25 @@
   "material_requisitions",
   "tasks_section",
   "tasks",
+  "downtime_section",
+  "down_time_start",
+  "down_time_end",
+  "total_downtime",
+  "downtime_reason",
+  "kpi_metrics",
+  "target_response_time",
+  "actual_response_time",
   "notes",
   "amended_from"
  ],
  "fields": [
   {
+   "allow_on_submit": 1,
    "fieldname": "maintenance_request",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Maintenance Request",
+   "mandatory_depends_on": "eval:doc.allow_unlink_mr==1",
    "options": "Maintenance Request",
    "reqd": 1
   },
@@ -69,6 +81,11 @@
    "label": "Expected Completion"
   },
   {
+   "fieldname": "end_date",
+   "fieldtype": "Datetime",
+   "label": "End Date"
+  },
+  {
    "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -92,8 +109,7 @@
    "fieldname": "required_materials",
    "fieldtype": "Table",
    "label": "Materials",
-   "options": "Job Order Material",
-   "reqd": 1
+   "options": "Job Order Material"
   },
   {
    "collapsible": 1,
@@ -105,8 +121,7 @@
    "fieldname": "material_requisitions",
    "fieldtype": "Table",
    "label": "Requisitions",
-   "options": "Linked Material Requisition",
-   "read_only": 1
+   "options": "Linked Material Requisition"
   },
   {
    "collapsible": 1,
@@ -119,6 +134,50 @@
    "fieldtype": "Table",
    "label": "Task List",
    "options": "Job Order Task"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "downtime_section",
+   "fieldtype": "Section Break",
+   "label": "Downtime Details"
+  },
+  {
+   "fieldname": "down_time_start",
+   "fieldtype": "Datetime",
+   "label": "Down Time Start"
+  },
+  {
+   "fieldname": "down_time_end",
+   "fieldtype": "Datetime",
+   "label": "Down Time End"
+  },
+  {
+   "fieldname": "total_downtime",
+   "fieldtype": "Float",
+   "label": "Total Downtime (Hours)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "downtime_reason",
+   "fieldtype": "Text Editor",
+   "label": "Reason for Downtime"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "kpi_metrics",
+   "fieldtype": "Section Break",
+   "label": "KPI Metrics"
+  },
+  {
+   "fieldname": "target_response_time",
+   "fieldtype": "Float",
+   "label": "Target Response Time (hrs)"
+  },
+  {
+   "fieldname": "actual_response_time",
+   "fieldtype": "Float",
+   "label": "Actual Response Time (hrs)",
+   "read_only": 1
   },
   {
    "fieldname": "notes",
@@ -152,11 +211,17 @@
    "link_filters": "[[\"Cost Center\",\"is_group\",\"=\",1]]",
    "options": "Cost Center",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_unlink_mr",
+   "fieldtype": "Check",
+   "label": "Allow Unlink MR"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-02 21:40:10.852979",
+ "modified": "2025-04-06 08:25:26.427026",
  "modified_by": "Administrator",
  "module": "hdmms",
  "name": "Job Order",

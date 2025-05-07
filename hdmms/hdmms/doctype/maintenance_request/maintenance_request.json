@@ -16,6 +16,7 @@
   "expected_start_date",
   "expected_end_date",
   "status",
+  "maintenance_team",
   "section_break_nwwm",
   "description",
   "job_order",
@@ -114,11 +115,17 @@
    "label": "Requested From Cost Center",
    "link_filters": "[[\"Cost Center\",\"is_group\",\"=\",0]]",
    "options": "Cost Center"
+  },
+  {
+   "fieldname": "maintenance_team",
+   "fieldtype": "Link",
+   "label": "Maintenance Team",
+   "options": "Asset Maintenance Team"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-02 21:39:19.440939",
+ "modified": "2025-04-05 23:01:33.478123",
  "modified_by": "Administrator",
  "module": "hdmms",
  "name": "Maintenance Request",

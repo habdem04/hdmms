@@ -270,6 +270,8 @@ permissions = [
     }
 ]
 
-permission_query_conditions = {
-    "Stock Entry": "hdmms.stf.get_permission_query_conditions"
-}
+# permission_query_conditions = {
+#     "Stock Entry": "hdmms.stf.get_permission_query_conditions"
+# }
+
+
